@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FixLengthNumeric" xml:space="preserve">
-    <value>مقدار فیلد {0} باید دقیقا {1} رقم باشد!</value>
+  <data name="SuccessfullyAdded" xml:space="preserve">
+    <value>درج {0} با موفقیت انجام شد</value>
   </data>
-  <data name="MaxLenValidation" xml:space="preserve">
-    <value>مقدار فیلد {0} نمی تواند بیشتر از {1} باشد</value>
+  <data name="SuccessfullyDeleted" xml:space="preserve">
+    <value>حذف {0} با موفقیت انجام شد</value>
   </data>
-  <data name="MinLenValidation" xml:space="preserve">
-    <value>مقدار فیلد {0} نمی تواند کمتر از {1} باشد</value>
-  </data>
-  <data name="NotExist" xml:space="preserve">
-    <value>{0} مورد نظر یافت نشد</value>
-  </data>
-  <data name="RegularExpression" xml:space="preserve">
-    <value>مقدار فیلد {0} را بصورت صحیح وارد کنید!</value>
+  <data name="SuccessfullyUpdated" xml:space="preserve">
+    <value>ویرایش {0} با موفقیت انجام شد</value>
   </data>
 </root>

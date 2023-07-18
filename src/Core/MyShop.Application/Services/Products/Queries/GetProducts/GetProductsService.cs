@@ -17,8 +17,8 @@ namespace MyShop.Application.Services.Products.Queries.GetProducts
         {
             var products = _context.Products.Select(x => new GetProductsDto { 
                 Id = x.Id,
-                Name = x.Name,
-                Quantity = x.Quantity
+                Name = x.Name.Value,
+                Quantity = x.Quantity.Value
             });
 
             if (!string.IsNullOrWhiteSpace(request.SearchKey))

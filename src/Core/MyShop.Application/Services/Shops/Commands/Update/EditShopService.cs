@@ -1,10 +1,7 @@
 ﻿using MyShop.Application.Interfaces;
+using MyShop.Common;
 using MyShop.Common.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MyShop.Common.Messages;
 
 namespace MyShop.Application.Services.Shops.Commands.Update
 {
@@ -23,12 +20,17 @@ namespace MyShop.Application.Services.Shops.Commands.Update
 
             var shop = await _context.Shops.FindAsync(dto.ShopId);
 
-            shop.Update(dto.Name, dto.Address);            
+            shop?.Update(dto.Name, dto.Address);  
+            if (!shop.Result.IsSucces)
+            {
+                result.SetErrors(shop.Result.Messeges);
+                return result;
+            }
 
             await _context.SaveChangesAsync();
 
-            if (result.IsSuccess)
-                result.Message.Add("ویرایش با موفقیت انجام شد");
+            result.SuccessFully(
+                string.Format(Notifications.SuccessfullyUpdated, DataDictionary.Shop));
 
             return result;
         }

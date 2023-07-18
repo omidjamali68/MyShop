@@ -1,5 +1,7 @@
 ﻿using MyShop.Application.Interfaces;
+using MyShop.Common;
 using MyShop.Common.Dto;
+using MyShop.Common.Messages;
 
 namespace MyShop.Application.Services.Managers.Commands.Update
 {
@@ -10,7 +12,7 @@ namespace MyShop.Application.Services.Managers.Commands.Update
         public EditManagerService(IApplicationDbContext context)
         {
             _context = context;
-        }
+        }        
 
         public async Task<ServiceResultDto> Execute(EditManagerDto dto)
         {
@@ -27,7 +29,8 @@ namespace MyShop.Application.Services.Managers.Commands.Update
 
             await _context.SaveChangesAsync();
 
-            result.Message.Add("ویرایش با موفقیت انجام شد");
+            result.SuccessFully(
+                string.Format(Notifications.SuccessfullyUpdated, DataDictionary.Manager));
             return result;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyShop.Application.Interfaces;
+using MyShop.Common;
 using MyShop.Common.Dto;
 using MyShop.Domain.Aggregates.Shops;
 using MyShop.Domain.SeedWork;
@@ -57,8 +58,8 @@ namespace MyShop.Application.Services.Shops.ShopManagers.Commands.Add
         {
             if (shop is null)
             {
-                result.Message.Add(Common.Messages.Validations.ShopNotExist);
-                result.IsSuccess = false;
+                result.WithError(
+                    string.Format(Common.Messages.Validations.NotExist, DataDictionary.ShopName));
                 return true;
             }
             else

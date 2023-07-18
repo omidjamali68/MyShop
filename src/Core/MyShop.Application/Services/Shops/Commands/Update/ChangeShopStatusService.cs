@@ -1,5 +1,7 @@
 ﻿using MyShop.Application.Interfaces;
+using MyShop.Common;
 using MyShop.Common.Dto;
+using MyShop.Common.Messages;
 using MyShop.Domain.Aggregates.Shops;
 
 namespace MyShop.Application.Services.Shops.Commands.Update
@@ -34,8 +36,7 @@ namespace MyShop.Application.Services.Shops.Commands.Update
         {
             if (shop is null)
             {
-                result.IsSuccess = false;
-                result.Message.Add("فروشگاه یافت نشد");
+                result.WithError(string.Format(Validations.NotExist, DataDictionary.Shop));                
             }
         }
     }

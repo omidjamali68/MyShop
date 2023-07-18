@@ -11,12 +11,10 @@ namespace MyShop.Domain.SharedKernel
         public const int VerificationKeyFixLength = 6;
 
         public const string RegularExpression = @"09\d{9}";
-        public Result Result { get; }
         public string Value { get; private set; }
 
-        private MobileNumber()
-        {   
-            Result = new Result();
+        private MobileNumber() 
+        {               
         }
 
         public static MobileNumber Create(string value)

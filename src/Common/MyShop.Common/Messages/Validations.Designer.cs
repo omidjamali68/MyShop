@@ -70,6 +70,15 @@ namespace MyShop.Common.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مقدار فیلد {0} نمی تواند بیشتر از {1} باشد.
+        /// </summary>
+        public static string MaxLenValidation {
+            get {
+                return ResourceManager.GetString("MaxLenValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مقدار فیلد {0} نمی تواند کمتر از {1} باشد.
         /// </summary>
         public static string MinLenValidation {
@@ -79,20 +88,20 @@ namespace MyShop.Common.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} مورد نظر یافت نشد.
+        /// </summary>
+        public static string NotExist {
+            get {
+                return ResourceManager.GetString("NotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مقدار فیلد {0} را بصورت صحیح وارد کنید!.
         /// </summary>
         public static string RegularExpression {
             get {
                 return ResourceManager.GetString("RegularExpression", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to فروشگاه مورد نظر یافت نشد.
-        /// </summary>
-        public static string ShopNotExist {
-            get {
-                return ResourceManager.GetString("ShopNotExist", resourceCulture);
             }
         }
     }

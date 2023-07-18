@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyShop.Common {
+namespace MyShop.Common.Messages {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MyShop.Common {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DataDictionary {
+    public class Notifications {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public DataDictionary() {
+        public Notifications() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MyShop.Common {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyShop.Common.DataDictionary", typeof(DataDictionary).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyShop.Common.Messages.Notifications", typeof(Notifications).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,29 @@ namespace MyShop.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to سن.
+        ///   Looks up a localized string similar to درج {0} با موفقیت انجام شد.
         /// </summary>
-        public static string Age {
+        public static string SuccessfullyAdded {
             get {
-                return ResourceManager.GetString("Age", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyAdded", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مدیر فروشگاه.
+        ///   Looks up a localized string similar to حذف {0} با موفقیت انجام شد.
         /// </summary>
-        public static string Manager {
+        public static string SuccessfullyDeleted {
             get {
-                return ResourceManager.GetString("Manager", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyDeleted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to شماره موبایل.
+        ///   Looks up a localized string similar to ویرایش {0} با موفقیت انجام شد.
         /// </summary>
-        public static string MobileNumber {
+        public static string SuccessfullyUpdated {
             get {
-                return ResourceManager.GetString("MobileNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to محصول.
-        /// </summary>
-        public static string Product {
-            get {
-                return ResourceManager.GetString("Product", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to دسته بندی محصول.
-        /// </summary>
-        public static string ProductCategory {
-            get {
-                return ResourceManager.GetString("ProductCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ویژگی محصول.
-        /// </summary>
-        public static string ProductFeature {
-            get {
-                return ResourceManager.GetString("ProductFeature", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to تعداد موجودی کالا.
-        /// </summary>
-        public static string Quantity {
-            get {
-                return ResourceManager.GetString("Quantity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to فروشگاه.
-        /// </summary>
-        public static string Shop {
-            get {
-                return ResourceManager.GetString("Shop", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to نام فروشگاه.
-        /// </summary>
-        public static string ShopName {
-            get {
-                return ResourceManager.GetString("ShopName", resourceCulture);
+                return ResourceManager.GetString("SuccessfullyUpdated", resourceCulture);
             }
         }
     }

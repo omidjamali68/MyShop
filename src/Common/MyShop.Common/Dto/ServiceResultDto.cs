@@ -27,8 +27,8 @@
             IsSuccess = true;
         }
 
-        public bool IsSuccess { get; set; }
-        public IList<string> Message { get; set; }
+        public bool IsSuccess { get; private set; }
+        public IList<string> Message { get; private set; }
 
         public static ServiceResultDto Create()
         {
@@ -38,6 +38,18 @@
         public void SetErrors(HashSet<string> messeges)
         {
             Message = messeges.ToList();
+            IsSuccess = false;
+        }
+
+        public void SuccessFully(string message)
+        {
+            Message.Add(message);
+            IsSuccess = true;
+        }
+
+        public void WithError(string message)
+        {
+            Message.Add(message);
             IsSuccess = false;
         }
     }

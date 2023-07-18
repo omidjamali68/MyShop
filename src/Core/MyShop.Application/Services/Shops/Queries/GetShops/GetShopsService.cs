@@ -18,7 +18,7 @@ namespace MyShop.Application.Services.Shops.Queries.GetShops
             var shops = _context.Shops.Select(p => new GetShopsDto
             {
                 Id = p.Id,
-                Name = p.Name,
+                Name = p.Name.Value,
                 Address = p.Address,
                 IsActive = p.IsActive,
             });

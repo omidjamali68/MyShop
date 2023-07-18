@@ -10,24 +10,14 @@ namespace MyShop.Domain.Aggregates.Managers
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public Age Age { get; private set; }
-        public MobileNumber MobileNumber { get; private set; }
-        public Result Result { get;}
+        public MobileNumber MobileNumber { get; private set; }        
 
         public HashSet<ShopManager> ShopeManagers { get; set; }
 
         private Manager()
         {
             ShopeManagers = new HashSet<ShopManager>();
-            Result = new Result();
-        }
-
-        private Manager(string firstName, string lastName, Age age, MobileNumber mobile)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            MobileNumber = mobile;
-            Age = age;
-        }
+        }        
 
         public static Manager Create(string firstName, string lastName, byte age, string mobile)
         {

@@ -40,7 +40,7 @@ namespace shiraz_shop
 
         }
 
-        // It's For Migration
+        //It's For Migration
         //public void ConfigureServices(IServiceCollection services)
         //{
         //    var conn = Configuration.GetConnectionString("DbConnectionString");

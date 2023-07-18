@@ -120,7 +120,28 @@
   <data name="Age" xml:space="preserve">
     <value>سن</value>
   </data>
+  <data name="Manager" xml:space="preserve">
+    <value>مدیر فروشگاه</value>
+  </data>
   <data name="MobileNumber" xml:space="preserve">
     <value>شماره موبایل</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>محصول</value>
+  </data>
+  <data name="ProductCategory" xml:space="preserve">
+    <value>دسته بندی محصول</value>
+  </data>
+  <data name="ProductFeature" xml:space="preserve">
+    <value>ویژگی محصول</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>تعداد موجودی کالا</value>
+  </data>
+  <data name="Shop" xml:space="preserve">
+    <value>فروشگاه</value>
+  </data>
+  <data name="ShopName" xml:space="preserve">
+    <value>نام فروشگاه</value>
   </data>
 </root>

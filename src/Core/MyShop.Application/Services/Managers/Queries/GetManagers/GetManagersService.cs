@@ -26,7 +26,7 @@ namespace MyShop.Application.Services.Managers.Queries.GetManagers
                 Shops = x.ShopeManagers.Select(sh => new ShopManagersDto
                 {
                     ShopId = sh.ShopId,
-                    Name = sh.Shop.Name
+                    Name = sh.Shop.Name.Value
                 }).ToList()
             });
 

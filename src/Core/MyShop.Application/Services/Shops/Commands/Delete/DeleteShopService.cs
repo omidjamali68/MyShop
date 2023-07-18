@@ -1,5 +1,7 @@
 ﻿using MyShop.Application.Interfaces;
+using MyShop.Common;
 using MyShop.Common.Dto;
+using MyShop.Common.Messages;
 using MyShop.Domain.Aggregates.Shops;
 
 namespace MyShop.Application.Services.Shops.Commands.Delete
@@ -22,7 +24,8 @@ namespace MyShop.Application.Services.Shops.Commands.Delete
 
             _context.Shops.Remove(shop);
             await _context.SaveChangesAsync();
-
+            result.SuccessFully(
+                string.Format(Notifications.SuccessfullyDeleted, DataDictionary.Shop));
             return result;
         }
 
@@ -30,8 +33,7 @@ namespace MyShop.Application.Services.Shops.Commands.Delete
         {
             if (shop is null)
             {
-                result.IsSuccess = false;
-                result.Message.Add("فروشگاه مورد نظر یافت نشد");
+                result.WithError(string.Format(Validations.NotExist, DataDictionary.Shop));                
             }
         }
     }

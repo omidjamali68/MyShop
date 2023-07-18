@@ -14,4 +14,8 @@
     <ProjectReference Include="..\..\Common\MyShop.Common\MyShop.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Aggregates\Shops\ValueObjects\" />
+  </ItemGroup>
+
 </Project>
