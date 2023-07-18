@@ -1,0 +1,56 @@
+﻿@using MyShop.Application.Services.Shops.Commands.Create;
+
+@model RegisterShopDto;
+
+@{
+    ViewData["Title"] = "ثبت فروشگاه";
+    Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
+}
+
+<section class="basic-elements">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="content-header">فرم ثبت فروشگاه جدید</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title mb-0">اطلاعات فروشگاه را وارد نمایید</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+                        <form method="post" asp-action="create">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <div class="input-group mb-3">
+                                            <input type="text" asp-for="Name" class="form-control" placeholder="نام فروشگاه">                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <div class="input-group mb-3">
+                                            <input type="text" asp-for="Address" class="form-control" placeholder="آدرس">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-location-arrow input-group-text"></span>
+                                            </div>
+                                        </div>
+                                    </div>                                                                       
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <input type="submit" value="ذخیره" class="btn btn-success col-md-12" />                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
