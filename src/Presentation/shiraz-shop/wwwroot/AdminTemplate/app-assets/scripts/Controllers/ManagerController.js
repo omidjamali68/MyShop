@@ -48,11 +48,11 @@
 
     };
 
-    var AjaxSuccess = function (data) {
+    var AjaxSuccess = function (data) {        
         if (data.isSuccess == true) {
             swal.fire(
                 'موفق!',
-                data.message[0],
+                'عملیات با موفقیت انجام شد',
                 'success'
             ).then(function (isConfirm) {
                 location.reload();
@@ -61,7 +61,7 @@
         else {
             swal.fire(
                 'هشدار!',
-                data.message[0],
+                data.error.message,
                 'warning'
             );
         }

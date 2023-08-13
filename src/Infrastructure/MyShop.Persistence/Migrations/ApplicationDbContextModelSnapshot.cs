@@ -182,7 +182,7 @@ namespace MyShop.Persistence.Migrations
                     b.HasIndex("Id", "Name")
                         .IsUnique();
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("MyShop.Domain.Aggregates.Products.Entities.ProductFeature", b =>
@@ -242,12 +242,26 @@ namespace MyShop.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Displayed")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -296,7 +310,7 @@ namespace MyShop.Persistence.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("ShopManager");
+                    b.ToTable("ShopManagers", (string)null);
                 });
 
             modelBuilder.Entity("MyShop.Domain.AspIdentities.ApplicationRole", b =>
@@ -465,7 +479,7 @@ namespace MyShop.Persistence.Migrations
             modelBuilder.Entity("MyShop.Domain.Aggregates.Products.Entities.ProductFeature", b =>
                 {
                     b.HasOne("MyShop.Domain.Aggregates.Products.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductFeatures")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -551,6 +565,8 @@ namespace MyShop.Persistence.Migrations
 
             modelBuilder.Entity("MyShop.Domain.Aggregates.Products.Product", b =>
                 {
+                    b.Navigation("ProductFeatures");
+
                     b.Navigation("ProductImages");
                 });
 

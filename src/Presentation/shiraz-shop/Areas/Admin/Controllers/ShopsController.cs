@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyShop.Application.Services.Managers.Queries.GetManagers;
 using MyShop.Application.Services.Shops.Commands.Create;
@@ -10,48 +11,24 @@ namespace shiraz_shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class ShopsController : Controller
-    {
-        private readonly IGetShpsService _getShopsService;
-        private readonly IRegisterShopService _registerShopService;
-        private readonly IDeleteShopService _deleteShopService;
-        private readonly IChageShopStatusService _chageShopStatusService;
-        private readonly IEditShopService _editShopService;
-        private readonly IGetManagersService _getManagersService;
+    {                
+        private readonly IMediator _mediator;
 
-        public ShopsController(
-            IGetShpsService getUsersService,
-            IRegisterShopService registerShopService,
-            IDeleteShopService deleteShopService,
-            IChageShopStatusService chageShopStatusService,
-            IEditShopService editShopService,
-            IGetManagersService getManagersService)
-        {
-            _getShopsService = getUsersService;
-            _registerShopService = registerShopService;
-            _deleteShopService = deleteShopService;
-            _chageShopStatusService = chageShopStatusService;
-            _editShopService = editShopService;
-            _getManagersService = getManagersService;
+        public ShopsController(IMediator mediator)
+        {                        
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index(string? searchKey, int page = 1)
-        {
-            var model = await _getShopsService.Execute(new RequestGetShopsDto
-            {
-                Page = page,
-                SearchKey = searchKey
-            });
+        {            
+            var model = await _mediator.Send(new GetShopsQuery(searchKey, page));
 
-            var managers = await _getManagersService.Execute(new RequestGetManagersDto
-            {
-                Page = 1,
-                SearchKey = null
-            });
+            var managers = await _mediator.Send(new GetManagersQuery(searchKey, page));
 
-            ViewBag.ExistManagers = new SelectList(managers.Data, "Id", "FullName");
+            ViewBag.ExistManagers = new SelectList(managers.Value.Data, "Id", "FullName");
 
-            return View(model);
+            return View(model.Value);
         }
 
         [HttpGet]
@@ -68,28 +45,28 @@ namespace shiraz_shop.Areas.Admin.Controllers
                 return View(dto);
             }
 
-            var res = await _registerShopService.Execute(dto);
+            await _mediator.Send(new CreateShopCommand(dto));
             return RedirectToAction(nameof(Index));
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int shopId)
         {
-            var result = await _deleteShopService.Execute(shopId);
+            var result = await _mediator.Send(new DeleteShopCommand(shopId));
             return Json(result);
         }
 
         [HttpPatch]
         public async Task<IActionResult> ShopSatusChange(int shopId)
         {
-            var result = await _chageShopStatusService.Execute(shopId);
+            var result = await _mediator.Send(new ChangeShopStatusCommand(shopId));
             return Json(result);
         }
 
         [HttpPut]
         public async Task<IActionResult> Edit(EditShopDto dto)
         {
-            var result = await _editShopService.Execute(dto);
+            var result = await _mediator.Send(new EditShopCommand(dto.ShopId, dto.Name, dto.Address));
             return Json(result);
         }
     }

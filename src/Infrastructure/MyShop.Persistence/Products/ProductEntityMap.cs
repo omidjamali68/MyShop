@@ -15,11 +15,11 @@ namespace MyShop.Persistence.Products
 
             builder.Property(x => x.Quantity)
                 .HasConversion(x => x.Value, 
-                    x => Domain.Aggregates.Products.ValueObjects.Quantity.Create(x));
+                    x => Domain.Aggregates.Products.ValueObjects.Quantity.Create(x).Value);
 
             builder.Property(x => x.Name)
                 .HasConversion(x => x.Value,
-                    x => Domain.SharedKernel.Name.Create(x));
+                    x => Domain.SharedKernel.Name.Create(x).Value);
         }
     }
 }

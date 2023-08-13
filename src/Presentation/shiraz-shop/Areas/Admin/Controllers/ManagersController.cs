@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using MyShop.Application.Services.Managers.Commands.Delete;
 using MyShop.Application.Services.Managers.Commands.Update;
 using MyShop.Application.Services.Managers.Queries.GetManager;
 using MyShop.Application.Services.Managers.Queries.GetManagers;
@@ -7,43 +9,38 @@ namespace shiraz_shop.Areas.Admin.Controllers
 {
     [Area("admin")]
     public class ManagersController : Controller
-    {
-        private readonly IGetManagersService _getManagersService;
-        private readonly IEditManagerService _editManagersService;
-        private readonly IGetManagerService _getManagerService;
+    {        
+        private readonly IMediator _mediator;
 
-        public ManagersController(
-            IGetManagersService getManagersService,
-            IEditManagerService editManagersService,
-            IGetManagerService getManagerService)
-        {
-            _getManagersService = getManagersService;
-            _editManagersService = editManagersService;
-            _getManagerService = getManagerService;
+        public ManagersController(IMediator mediator)
+        {            
+            _mediator = mediator;
         }
 
         public async Task<IActionResult> Index(string? searchKey, int page = 1)
         {
-            var model = await _getManagersService.Execute(
-                new RequestGetManagersDto
-                {
-                    SearchKey = searchKey,
-                    Page = page
-                });
-            return View(model);
+            var model = await _mediator.Send(new GetManagersQuery(searchKey, page));
+            return View(model.Value);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit(EditManagerDto dto)
+        public async Task<IActionResult> Edit(EditManagerCommand dto)
         {
-            var result = await _editManagersService.Execute(dto);
+            var result = await _mediator.Send(dto);
             return Json(result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetById(GetManagerDto dto)
+        public async Task<IActionResult> GetById(GetManagerQuery dto)
         {
-            var result = await _getManagerService.Execute(dto);
+            var result = await _mediator.Send(dto);
+            return Json(result.Value);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(DeleteManagerCommand dto)
+        {
+            var result = await _mediator.Send(dto);
             return Json(result);
         }
     }

@@ -7,25 +7,29 @@ namespace MyShop.Domain.Aggregates.Products.ValueObjects
     public class Quantity : ValueObject
     {
         public const int MinValue = 0;
-        public int Value { get; private set; }
+        public int Value { get; }
 
-        private Quantity()
+        private Quantity(int value)
         {
+            Value = value;
         }
 
-        public static Quantity Create(int value)
-        {
-            var quantity = new Quantity();
-
+        public static Result<Quantity> Create(int value)
+        {            
             if (value < MinValue)
-            {
-                quantity.Result.WithError(
-                    string.Format(Validations.MinLenValidation,DataDictionary.Quantity,MinValue));
-                return quantity;
+            {                
+                return Result.Failure<Quantity>(Error.Create(
+                    "Product.Quantity.MinValueError",
+                    string.Format(Validations.MinLenValidation, DataDictionary.Quantity, MinValue))
+                    );
             }
+            
+            return new Quantity(value);
+        }
 
-            quantity.Value = value;
-            return quantity;
+        public override IEnumerable<object> GetAtomicValues()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyShop.Domain.Aggregates.Managers;
 using MyShop.Domain.Aggregates.Products;
+using MyShop.Domain.Aggregates.Products.Entities;
 using MyShop.Domain.Aggregates.Shops;
 using MyShop.Domain.AspIdentities;
 
@@ -14,6 +15,7 @@ namespace MyShop.Application.Interfaces
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
 
         int SaveChanges(bool acceptAllChangesOnSuccess);

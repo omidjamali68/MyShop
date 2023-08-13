@@ -3,32 +3,33 @@ using MyShop.Domain.SharedKernel;
 
 namespace MyShop.Domain.Aggregates.Products.Entities
 {
-    public class Category : Entity
+    public sealed class Category : Entity
     {
-        public Name Name { get; private set; }
+        private HashSet<Category> _subCategories = new();
 
-        public virtual Category ParentCategory { get; private set; }
+        public Name Name { get; private set; }        
+
+        public Category ParentCategory { get; private set; }
         public int? ParentCategoryId { get; private set; }
-        
-        public virtual ICollection<Category> SubCategories { get; private set; }
+
+        public IReadOnlyCollection<Category> SubCategories => _subCategories;
 
         private Category()
         {            
         }
 
-        public static Category Create(string name, int? parentCategoryId)
+        public static Result<Category> Create(string name, int? parentCategoryId)
         {
             var category = new Category();
 
             var nameResult = Name.Create(name);
 
-            if (!nameResult.Result.IsSucces)
+            if (nameResult.IsFailure)
             {
-                category.Result.SetErrors(nameResult.Result.Messeges);
-                return category;
+                return Result.Failure<Category>(nameResult.Error);
             }
 
-            category.Name = nameResult;
+            category.Name = nameResult.Value;
             category.ParentCategoryId = parentCategoryId;
             return category;
         }

@@ -8,6 +8,8 @@ namespace MyShop.Persistence.ShopManagers
     {
         public void Configure(EntityTypeBuilder<ShopManager> builder)
         {
+            builder.ToTable("ShopManagers");
+
             builder.HasKey(x => new {x.ShopId, x.ManagerId});
 
             builder.HasOne(x => x.Shop)

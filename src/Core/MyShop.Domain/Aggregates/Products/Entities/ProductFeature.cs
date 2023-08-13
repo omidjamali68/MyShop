@@ -2,9 +2,9 @@
 
 namespace MyShop.Domain.Aggregates.Products.Entities
 {
-    public class ProductFeature : Entity
+    public sealed class ProductFeature : Entity
     {
-        public virtual Product Product { get; private set; }
+        public Product Product { get; private set; }
         public int ProductId { get; private set; }
         public string DisplayName { get; private set; }
         public string Value { get; private set; }

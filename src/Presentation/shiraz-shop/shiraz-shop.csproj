@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>shiraz_shop</RootNamespace>
@@ -24,8 +24,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Configs\" />
     <Folder Include="Infra\" />
-    <Folder Include="wwwroot\AdminTemplate\app-assets\scripts\Controllers\" />
-    <Folder Include="wwwroot\AdminTemplate\app-assets\scripts\Services\" />
   </ItemGroup>
 
   <ItemGroup>

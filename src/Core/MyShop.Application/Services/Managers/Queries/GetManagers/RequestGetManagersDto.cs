@@ -2,7 +2,10 @@
 
 namespace MyShop.Application.Services.Managers.Queries.GetManagers
 {
-    public class RequestGetManagersDto : RequestGetListDto
-    {        
+    public sealed record RequestGetManagersDto : RequestGetListDto
+    {
+        public RequestGetManagersDto(string? SearchKey, int Page) : base(SearchKey, Page)
+        {
+        }
     }
 }

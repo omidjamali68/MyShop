@@ -11,26 +11,26 @@ namespace MyShop.Domain.SharedKernel
         public const int VerificationKeyFixLength = 6;
 
         public const string RegularExpression = @"09\d{9}";
-        public string Value { get; private set; }
+        public string Value { get; }
 
-        private MobileNumber() 
+        public static explicit operator string(MobileNumber mobile) => mobile.Value; 
+
+        private MobileNumber(string value) 
         {               
+            Value = value;
         }
 
-        public static MobileNumber Create(string value)
-        {
-            var mobile =
-                new MobileNumber();                       
-
+        public static Result<MobileNumber> Create(string value)
+        {                      
             if (value.Length != FixLength)
             {
                 string errorMessage = string.Format
                     (Validations.FixLengthNumeric,
                     DataDictionary.MobileNumber, FixLength);
 
-                mobile.Result.WithError(errorMessage);
-
-                return mobile;
+                return Result.Failure<MobileNumber>(Error.Create(
+                    "Manager.MobileNumber.FixLenError", 
+                    string.Format(Validations.FixLengthNumeric,DataDictionary.MobileNumber, FixLength)));
             }
 
             if (System.Text.RegularExpressions.Regex.IsMatch
@@ -40,14 +40,17 @@ namespace MyShop.Domain.SharedKernel
                     (Validations.RegularExpression,
                     DataDictionary.MobileNumber);
 
-                mobile.Result.WithError(errorMessage);
+                return Result.Failure<MobileNumber>(Error.Create(
+                    "Manager.MobileNumber.RegexError",
+                    string.Format(Validations.RegularExpression,DataDictionary.MobileNumber)));
+            }            
 
-                return mobile;
-            }
+            return new MobileNumber(value); 
+        }
 
-            mobile.Value = value;
-
-            return mobile; 
+        public override IEnumerable<object> GetAtomicValues()
+        {
+            throw new NotImplementedException();
         }
     }
 }

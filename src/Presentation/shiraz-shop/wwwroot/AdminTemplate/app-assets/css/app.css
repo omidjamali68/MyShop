@@ -1945,10 +1945,19 @@ pre code {
   margin-bottom : 1.5rem;
   background-color : transparent;
 }
-.table th, .table td {
+.table th {
   padding : 0.4rem;
   border-top : 1px solid #DEE2E6;
 }
+.table td {
+    padding:4px;
+    border-top: 1px solid #DEE2E6;
+}
+.td-button {
+    padding: 10px;
+    border-top: 1px solid #DEE2E6;
+}
+
 .table thead th {
   vertical-align : bottom;
   border-bottom : 2px solid #DEE2E6;

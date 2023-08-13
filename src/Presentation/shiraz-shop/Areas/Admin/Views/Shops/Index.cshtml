@@ -1,5 +1,6 @@
 ﻿@using MyShop.Application.Services.Shops.Queries.GetShops;
-@model ResultGetShopsDto;
+
+@model GetShopsResponse;
 
 @{
     ViewData["Title"] = "فروشگاه ها";
@@ -24,8 +25,17 @@
 
                                 <form method="get" class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                     <fieldset class="form-group">
-                                        <input type="text" class="form-control" name="searchkey">
-                                        <button class="btn btn-success">جستجو</button>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="input-group w-auto">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       placeholder="نام فروشگاه، آدرس"
+                                                       name="searchkey" />
+                                                <button class="btn btn-primary" data-mdb-ripple-color="dark">
+                                                    جستجو
+                                                </button>
+                                            </div>
+                                        </div>
                                     </fieldset>
                                 </form>
 
@@ -54,7 +64,7 @@
                                                         {
                                                             <td>غیر فعال</td>
                                                         }
-                                                        <td>
+                                                        <td class="td-button">
                                                             <button class="btn btn-info btn-sm" onclick="ShopController.ShowAssignManagerModal('@item.Id', '@item.Name')">ثبت مدیر</button>
                                                             <button class="btn btn-info btn-sm" onclick="ShopController.ShowEditModal('@item.Id' , '@item.Name', '@item.Address')">ویرایش</button>
                                                             <button class="btn btn-danger btn-sm" onclick="ShopController.Delete('@item.Id')">حذف</button>
@@ -82,12 +92,6 @@
         </section>
     </div>
 </div>
-
-@section Scripts
-{
-    <link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-    <script src="~/Sweetalert2/sweetalert2.min.js"></script>    
-}
 
 @section Modals
 {

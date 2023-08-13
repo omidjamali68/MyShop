@@ -2,7 +2,10 @@
 
 namespace MyShop.Application.Services.Shops.Queries.GetShops
 {
-    public class RequestGetShopsDto : RequestGetListDto
-    {        
+    public sealed record RequestGetShopsDto : RequestGetListDto
+    {
+        public RequestGetShopsDto(string? SearchKey, int Page) : base(SearchKey, Page)
+        {
+        }
     }
 }

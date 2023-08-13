@@ -1,29 +1,44 @@
 ﻿using MyShop.Common;
 using MyShop.Common.Messages;
 using MyShop.Domain.SeedWork;
+using System.Net.Mail;
 
 namespace MyShop.Domain.SharedKernel
 {
-    public class Name : ValueObject
+    public sealed class Name : ValueObject
     {
         public const byte MaxLen = 100;
-        public string Value { get; private set; }
+        public string Value { get; }
 
-        private Name()
+        public static explicit operator string(Name name) => name.Value;
+
+        private Name(string value)
         {
+            Value = value;
         }
 
-        public static Name Create(string name)
-        {
-            var shopName = new Name();
-            if (name.Length > MaxLen)
+        public static Result<Name> Create(string name)
+        {      
+            if (string.IsNullOrWhiteSpace(name))
             {
-                shopName.Result.WithError(
-                    string.Format(Validations.MaxLenValidation, DataDictionary.ShopName, MaxLen));
-                return shopName;
+                return Result.Failure<Name>(Error.Create(
+                    "Shop.Name.Empty",
+                    string.Format(Validations.StringIsEmpty, DataDictionary.ShopName)));
             }
-            shopName.Value = name;
-            return shopName;
+
+            if (name.Length > MaxLen)
+            {               
+                return Result.Failure<Name>(Error.Create(
+                    "Shop.Name.MaxLenException", 
+                    string.Format(Validations.MaxLenValidation, DataDictionary.ShopName, MaxLen)));
+            }
+            
+            return new Name(name);
+        }
+
+        public override IEnumerable<object> GetAtomicValues()
+        {
+            yield return Value;
         }
     }
 }

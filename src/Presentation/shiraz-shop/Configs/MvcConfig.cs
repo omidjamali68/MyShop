@@ -1,9 +1,15 @@
-﻿namespace shiraz_shop.Configs
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+
+namespace shiraz_shop.Configs
 {
     public class MvcConfig : MyConfiguration
     {
         public override void ConfigureServiceContainer(IServiceCollection container)
         {
+            container.AddMediatR(cfg => 
+                cfg.RegisterServicesFromAssembly(MyShop.Application.AssemblyReference.Assembly));
+            
             container.AddControllersWithViews();
             container.AddRouting();
 
@@ -16,7 +22,7 @@
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
             app.UseEndpoints(endpoints =>
             {

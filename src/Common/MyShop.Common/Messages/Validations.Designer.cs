@@ -104,5 +104,14 @@ namespace MyShop.Common.Messages {
                 return ResourceManager.GetString("RegularExpression", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا مقدار فیلد {0} را وارد کنید.
+        /// </summary>
+        public static string StringIsEmpty {
+            get {
+                return ResourceManager.GetString("StringIsEmpty", resourceCulture);
+            }
+        }
     }
 }

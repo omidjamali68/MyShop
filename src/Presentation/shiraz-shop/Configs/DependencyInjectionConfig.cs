@@ -3,6 +3,8 @@ using MyShop.Persistence;
 using MyShop.Application.Interfaces;
 using MyShop.Application.Services.AspIdentities.ApplicationUsers;
 using MyShop.Domain.Core.RepositoryContracts;
+using MyShop.Persistence.Shops;
+using MyShop.Domain;
 
 namespace shiraz_shop.Configs
 {
@@ -20,14 +22,18 @@ namespace shiraz_shop.Configs
                  .AsImplementedInterfaces()
                  .InstancePerLifetimeScope();
 
+            container.RegisterAssemblyTypes(typeof(ShopRepository).Assembly)
+                 .AssignableTo<IRepository>()
+                 .AsImplementedInterfaces()
+                 .InstancePerLifetimeScope();
+
+            container.RegisterType<UnitOfWork>()
+                .As<IUnitOfWork>()
+                .InstancePerLifetimeScope();
+
             container.RegisterType<ApplicationDbContext>()
                 .As<IApplicationDbContext>()
                 .InstancePerLifetimeScope();
-
-            //container.RegisterAssemblyTypes(typeof(UserRepository).Assembly)
-            //     .AssignableTo<IRepository>()
-            //     .AsImplementedInterfaces()
-            //     .InstancePerLifetimeScope();
         }
     }
 }

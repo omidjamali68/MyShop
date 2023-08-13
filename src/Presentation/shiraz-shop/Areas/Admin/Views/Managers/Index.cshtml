@@ -1,5 +1,6 @@
 ﻿@using MyShop.Application.Services.Managers.Queries.GetManagers;
-@model ResultGetManagersDto;
+
+@model GetManagersResponse;
 
 @{
     ViewData["Title"] = "مدیران فروشگاه";
@@ -35,8 +36,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        @*<input type="text" class="form-control" name="searchkey">
-                                        <button class="btn btn-success">جستجو</button>*@
+                                       
                                     </fieldset>
                                 </form>
 
@@ -92,12 +92,6 @@
         </section>
     </div>
 </div>
-
-@section Scripts
-{
-    <link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-    <script src="~/Sweetalert2/sweetalert2.min.js"></script>
-}
 
 @section Modals
 {

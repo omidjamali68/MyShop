@@ -1,6 +1,6 @@
 ﻿namespace MyShop.Application.Services.Managers.Queries.GetManagers
 {
-    public class GetManagersDto
+    public sealed record GetManagersDto
     {
         public GetManagersDto()
         {

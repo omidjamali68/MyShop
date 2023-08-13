@@ -16,7 +16,10 @@ namespace MyShop.Persistence.Shops
 
             builder.Property(x => x.Name)
                 .HasMaxLength(Name.MaxLen)
-                .HasConversion(x => x.Value, x => Name.Create(x));
+                .HasConversion(x => x.Value, x => Name.Create(x).Value);
+
+            
+
         }
     }
 }

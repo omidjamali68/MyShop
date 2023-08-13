@@ -5,6 +5,7 @@ using MyShop.Application.Interfaces;
 using MyShop.Domain.Aggregates.Shops;
 using MyShop.Domain.Aggregates.Managers;
 using MyShop.Domain.Aggregates.Products;
+using MyShop.Domain.Aggregates.Products.Entities;
 
 namespace MyShop.Persistence
 {
@@ -16,10 +17,10 @@ namespace MyShop.Persistence
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
-        {
-            
+        {            
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

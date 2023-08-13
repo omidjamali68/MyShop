@@ -9,6 +9,8 @@ namespace MyShop.Persistence.Products
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
+            builder.ToTable("Categories");
+
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
@@ -19,7 +21,7 @@ namespace MyShop.Persistence.Products
 
             builder.Property(x => x.Name)
                 .HasMaxLength(Name.MaxLen)
-                .HasConversion(x => x.Value, x => Name.Create(x));
+                .HasConversion(x => x.Value, x => Name.Create(x).Value);
 
             builder.HasIndex(x => new {x.Id, x.Name})
                 .IsUnique();

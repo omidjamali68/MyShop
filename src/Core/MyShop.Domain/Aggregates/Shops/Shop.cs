@@ -4,79 +4,77 @@ using MyShop.Domain.SharedKernel;
 
 namespace MyShop.Domain.Aggregates.Shops
 {
-    public class Shop : Entity
+    public sealed class Shop : Entity
     {
-        public Name Name { get; private set; }
+        private readonly HashSet<ShopManager> _shopManagers = new();
+
+        public Name Name { get; private set; }        
         public string Address { get; private set; }
         public bool IsActive { get; private set; }
-        public HashSet<ShopManager> ShopManagers { get; set; }                       
+        public IReadOnlyCollection<ShopManager> ShopManagers => _shopManagers;
 
-        private Shop()
-        {
-            ShopManagers = new HashSet<ShopManager>();
+        private Shop() {}
+
+        private Shop(Name shopName, string address, bool isActive)
+        {            
+            Name = shopName;
+            Address = address;
+            IsActive = isActive;
         }
 
-        public static Shop Create(string name, string address, bool isActive)
-        {               
-            var shop = new Shop();
+        public static Result<Shop> Create(string name, string address, bool isActive)
+        {                           
             var shopName = Name.Create(name);
 
-            if (!shopName.Result.IsSucces)
-            {
-                shop.Result.SetErrors(shopName.Result.Messeges);
-                return shop;
+            if (!shopName.IsSuccess)
+            {                
+                return Result.Failure<Shop>(shopName.Error);
             }
-
-            shop.Name = shopName;
-            shop.Address = address;
-            shop.IsActive = isActive;
             
-            return shop;
+            return new Shop(shopName.Value, address, isActive);
         }
 
-        public void ChangeStatus()
+        public Result ChangeStatus()
         {
             if (IsActive)
                 IsActive = false;
             else
                 IsActive = true;
+
+            return Result.Success();
         }
 
-        public void Update(string name, string address)
+        public Result Update(string name, string address)
         {
-            var shopName = Name.Create(name);
-            if (!shopName.Result.IsSucces)
+            var shop = Create(name, address, true);
+
+            if (shop.IsFailure)
             {
-                this.Result.SetErrors(shopName.Result.Messeges);
-                return;
+                return Result.Failure(shop.Error);
             }
-            Name = shopName;
-            Address = address;
+
+            Name = shop.Value.Name;
+            Address = shop.Value.Address;
+
+            return Result.Success();
         }
 
-        public void AssignNewManager(string firstName, string lastName, byte age, string mobileNumber)
+        public Result AssignNewManager(string firstName, string lastName, byte age, string mobileNumber)
         {
             var manager = Manager.Create(firstName, lastName, age, mobileNumber);
-            if (!manager.Result.IsSucces)
+            if (manager.IsFailure)
             {
-                Result.SetErrors(manager.Result.Messeges);
-                return;
+                return Result.Failure<Shop>(manager.Error);
             }
 
-            ShopManagers.Add(new ShopManager
-            {
-                Shop = this,
-                Manager = manager
-            });
+            _shopManagers.Add(ShopManager.Create(this, manager.Value));
+
+            return Result.Success();
         }
 
         public void AssignExistManager(Manager selectedManager)
         {
-            ShopManagers.Add(new ShopManager
-            {
-                Shop = this,
-                Manager = selectedManager
-            });
+            _shopManagers.Add(ShopManager.Create(this, selectedManager));
         }
     }
 }

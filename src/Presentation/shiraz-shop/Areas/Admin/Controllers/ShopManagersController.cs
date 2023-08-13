@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using MyShop.Application.Services.Shops.ShopManagers.Commands.Add;
 
 namespace shiraz_shop.Areas.Admin.Controllers
@@ -6,17 +7,17 @@ namespace shiraz_shop.Areas.Admin.Controllers
     [Area("admin")]
     public class ShopManagersController : Controller
     {
-        private readonly IAddShopManagerService _addShopManagerService;
+        private readonly IMediator _mediator;
 
-        public ShopManagersController(IAddShopManagerService addShopManagerService)
+        public ShopManagersController(IMediator mediator)
         {
-            _addShopManagerService = addShopManagerService;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddShopManagerDto dto)
+        public async Task<IActionResult> Add(AddShopMangerCommand dto)
         {
-            var result = await _addShopManagerService.Execute(dto);
+            var result = await _mediator.Send(dto);
             return Json(result);
         }
 

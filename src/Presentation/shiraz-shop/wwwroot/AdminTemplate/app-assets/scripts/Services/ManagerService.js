@@ -23,15 +23,15 @@ var ManagerService = function () {
         });
     };
 
-    var GetManager = function (requestDto, ajaxSuccess, ajaxFailed) {
+    var GetManager = function (requestDto, onSuccess, onFailure) {
         $.ajax({
             contentType: 'application/x-www-form-urlencoded',
             dataType: 'json',
             type: "GET",
             url: baseApplicationPath + 'admin/managers/getbyid',
             data: requestDto,
-            success: ajaxSuccess,
-            error: ajaxFailed
+            success: onSuccess,
+            error: onFailure
         });
     };
 

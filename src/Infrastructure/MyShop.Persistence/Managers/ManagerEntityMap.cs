@@ -21,11 +21,12 @@ namespace MyShop.Persistence.Managers
                 .HasMaxLength(100);
 
             builder.Property(x => x.Age)
-                .HasConversion(x => x.Value, x => Domain.Aggregates.Managers.ValueObjects.Age.Create(x));
+                .HasConversion(x => x.Value, 
+                    x => Domain.Aggregates.Managers.ValueObjects.Age.Create(x).Value);
 
             builder.Property(xx => xx.MobileNumber)
                 .HasMaxLength(MobileNumber.FixLength)
-                .HasConversion(x => x.Value, x => MobileNumber.Create(x));
+                .HasConversion(x => x.Value, x => MobileNumber.Create(x).Value);
         }
     }
 }

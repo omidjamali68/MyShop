@@ -11,7 +11,7 @@ var ShopService = function () {
         });
     };
 
-    var ChangeStatus = function (requestDto, ajaxSuccess, ajaxFailed) {
+    var ChangeStatus = function (requestDto, ajaxSuccess, ajaxFailed) {        
         $.ajax({
             contentType: 'application/x-www-form-urlencoded',
             dataType: 'json',

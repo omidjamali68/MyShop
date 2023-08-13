@@ -17,7 +17,7 @@ namespace MyShop.Application.Services.Shops.ShopManagers.Commands.Add
             _context = context;
         }
 
-        public async Task<ServiceResultDto> Execute(AddShopManagerDto dto)
+        public async Task<Result<ServiceResultDto>> Execute(AddShopManagerDto dto)
         {
             var result = ServiceResultDto.Create();
 
@@ -28,21 +28,20 @@ namespace MyShop.Application.Services.Shops.ShopManagers.Commands.Add
 
             var mobile = MobileNumber.Create(dto.MobileNumber);
 
-            if (!mobile.Result.IsSucces)
+            if (mobile.IsFailure)
             {
-                result.SetErrors(mobile.Result.Messeges);
-                return result;
+                return Result.Failure<ServiceResultDto>(mobile.Error);
             }
 
             var selectedManager = await _context.Managers.FirstOrDefaultAsync(x => 
-                x.MobileNumber == mobile);
+                x.MobileNumber == mobile.Value);
 
             if (selectedManager is null)            
                 shop.AssignNewManager(dto.FirstName, dto.LastName, dto.Age, dto.MobileNumber);            
             else
                 shop.AssignExistManager(selectedManager);
 
-            if (!shop.Result.IsSucces)
+            if (!shop.Result.IsSuccess)
             {
                 result.SetErrors(shop.Result.Messeges);
                 return result;

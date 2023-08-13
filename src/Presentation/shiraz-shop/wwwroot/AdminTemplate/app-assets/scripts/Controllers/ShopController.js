@@ -9,7 +9,8 @@
         managerService.GetManager(requestDto, getManagerComplete, AjaxFailed);
     };
 
-    var getManagerComplete = function (data) {        
+    var getManagerComplete = function (data) {
+        console.log(data);
         $('#AssignManager_firstName').val(data.firstName);
         $('#AssignManager_lastName').val(data.lastName);
         $('#AssignManager_age').val(data.age);
@@ -48,7 +49,7 @@
             cancelButtonColor: '#7cacbe',
             confirmButtonText: 'بله ، تغییر وضعیت انجام شود',
             cancelButtonText: 'خیر'
-        }).then((result) => {
+        }).then((result) => {            
             if (result.value) {
 
                 var requestDto = {
@@ -112,11 +113,11 @@
 
     };
 
-    var AjaxSuccess = function (data) {
+    var AjaxSuccess = function (data) {        
         if (data.isSuccess == true) {
             swal.fire(
                 'موفق!',
-                data.message[0],
+                'عملیات با موفقیت انجام شد',
                 'success'
             ).then(function (isConfirm) {
                 location.reload();
@@ -125,7 +126,7 @@
         else {
             swal.fire(
                 'هشدار!',
-                data.message[0],
+                data.error.message,
                 'warning'
             );
         }

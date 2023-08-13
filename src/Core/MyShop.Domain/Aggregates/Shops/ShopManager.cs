@@ -4,10 +4,25 @@ namespace MyShop.Domain.Aggregates.Shops
 {
     public class ShopManager
     {
-        public int ManagerId { get; set; }
-        public Manager Manager { get; set; }
+        private ShopManager(Shop shop, Manager manager)
+        {
+            Shop = shop;
+            Manager = manager;
+        }
 
-        public int ShopId { get; set; }
-        public Shop Shop { get; set; }
+        private ShopManager()
+        {            
+        }
+
+        public int ManagerId { get; private set; }
+        public Manager Manager { get; private set; }
+
+        public int ShopId { get; private set; }
+        public Shop Shop { get; private set; }
+
+        public static ShopManager Create(Shop shop, Manager manager)
+        {
+            return new ShopManager(shop, manager);
+        }
     }
 }

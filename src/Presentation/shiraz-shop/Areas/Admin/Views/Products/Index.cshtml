@@ -1,7 +1,7 @@
 ﻿@using MyShop.Application.Services.Products.Queries.GetProducts;
-@model ResultGetProducts
+@model GetProductsResponse
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "لیست محصولات";
     Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
 }
 
@@ -25,8 +25,17 @@
 
                                 <form method="get" class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                     <fieldset class="form-group">
-                                        <input type="text" class="form-control" name="searchkey">
-                                        <button class="btn btn-success">جستجو</button>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="input-group w-auto">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       placeholder="نام محصول، دسته بندی، برند"
+                                                       name="searchkey" />
+                                                <button class="btn btn-primary" data-mdb-ripple-color="dark">
+                                                    جستجو
+                                                </button>
+                                            </div>
+                                        </div>                                        
                                     </fieldset>
                                 </form>
 
@@ -35,8 +44,13 @@
                                         <table class="table table-striped table-bordered zero-configuration dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                             <thead>
                                                 <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="نام محصول: activate to sort column descending" style="width: 222px;">نام محصول</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="آدرس: activate to sort column ascending" style="width: 401px;">تعداد موجود</th>
+                                                    <th class="sorting_asc">نام</th>
+                                                    <th class="sorting_asc">دسته بندی</th>
+                                                    <th class="sorting_asc">برند </th>
+                                                    <th class="sorting_asc">قیمت </th>
+                                                    <th class="sorting_asc">موجودی </th>
+                                                    <th class="sorting_asc">نمایش در سایت؟ </th>
+                                                    <th class="sorting_asc"> </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -45,11 +59,15 @@
                                                 {
                                                     <tr role="row" class="odd">
                                                         <td class="sorting_1">@item.Name</td>
+                                                        <td>@item.Category</td>
+                                                        <td>@item.Brand</td>
+                                                        <td>@item.Price</td>
                                                         <td>@item.Quantity</td>
+                                                        <td>@item.Displayed</td>
                                                         
                                                         <td>
                                                             <button class="btn btn-info btn-sm" onclick="ShopController.ShowEditModal('@item.Id' , '@item.Name', '@item.Quantity')">ویرایش</button>
-                                                            <button class="btn btn-danger btn-sm" onclick="ShopController.Delete('@item.Id')">حذف</button>                                                            
+                                                            <button class="btn btn-danger btn-sm" onclick="ProductsController.Delete('@item.Id')">حذف</button>                                                            
                                                         </td>
                                                     </tr>
                                                 }

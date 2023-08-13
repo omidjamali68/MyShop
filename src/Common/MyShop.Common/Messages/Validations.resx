@@ -132,4 +132,7 @@
   <data name="RegularExpression" xml:space="preserve">
     <value>مقدار فیلد {0} را بصورت صحیح وارد کنید!</value>
   </data>
+  <data name="StringIsEmpty" xml:space="preserve">
+    <value>لطفا مقدار فیلد {0} را وارد کنید</value>
+  </data>
 </root>

@@ -1,12 +1,23 @@
 ﻿namespace MyShop.Domain.SeedWork
 {
-    public abstract class ValueObject
+    public abstract class ValueObject : IEquatable<ValueObject>
     {
-        public ValueObject()
+        public bool Equals(ValueObject? other)
         {
-            Result = new Result();
+            return other is not null && ValuesAreEqual(other);
         }
 
-        public Result Result { get; }
+        public abstract IEnumerable<object> GetAtomicValues();
+
+        private bool ValuesAreEqual(ValueObject other)
+        {
+            return GetAtomicValues().SequenceEqual(other.GetAtomicValues());
+        }
+
+        public override int GetHashCode()
+        {
+            return GetAtomicValues()
+                .Aggregate(default(int), HashCode.Combine);
+        }
     }
 }

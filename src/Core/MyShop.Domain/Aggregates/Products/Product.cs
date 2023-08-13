@@ -5,39 +5,63 @@ using MyShop.Domain.SharedKernel;
 
 namespace MyShop.Domain.Aggregates.Products
 {
-    public class Product : AggregateRoot
+    public sealed class Product : AggregateRoot
     {
+        private HashSet<ProductImage> _productImages = new();
+        private HashSet<ProductFeature> _productFeatures = new();
+
         public Name Name { get; private set; }
         public Quantity Quantity { get; private set; }
-        public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual ICollection<ProductImage> ProductImages { get; private set; }
+        public string Brand { get; private set; }
+        public string Description { get; private set; }
+        public int Price { get; private set; }
+        public bool Displayed { get; private set; }
+        public int CategoryId { get; private set; }
+        public  Category Category { get; private set; }
+        public IReadOnlyCollection<ProductImage> ProductImages => _productImages;
+        public IReadOnlyCollection<ProductFeature> ProductFeatures => _productFeatures;        
 
-        private Product()
+        private Product() { }
+
+        public Product(
+            Name name, 
+            Quantity quantity, 
+            string brand, 
+            string description, 
+            int price, 
+            bool displayed, 
+            int categoryId)
         {
+            Name = name;
+            Quantity = quantity;
+            Brand = brand;
+            Description = description;
+            Price = price;
+            Displayed = displayed;
+            CategoryId = categoryId;
         }
 
-        public static Product Create(string name, int quantity)
-        {
-            var product = new Product();
-
+        public static Result<Product> Create(
+            string name, int quantity, string brand, string description, int price, bool displayed, int categoryId)
+        {            
             var quantityResult = Quantity.Create(quantity);
-            if (!quantityResult.Result.IsSucces)
+            if (quantityResult.IsFailure)
             {
-                product.Result.SetErrors(quantityResult.Result.Messeges);
-                return product;
+                return Result.Failure<Product>(quantityResult.Error);
             }
-            product.Quantity = quantityResult;
 
             var nameResult = Name.Create(name);
-            if (!nameResult.Result.IsSucces)
+            if (nameResult.IsFailure)
             {
-                product.Result.SetErrors(nameResult.Result.Messeges);
-                return product;
-            }
-            product.Name = nameResult;
+                return Result.Failure<Product>(nameResult.Error);
+            }            
 
-            return product;
+            return new Product(
+                nameResult.Value, quantityResult.Value, brand, description, price, displayed, categoryId);
+        }
+
+        public void Delete()
+        {            
         }
     }
 }
