@@ -6,7 +6,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Shops.Commands.Update
 {
-    public sealed class ChangeShopStatusCommandHandler : ICommandHandler<ChangeShopStatusCommand>
+    internal sealed class ChangeShopStatusCommandHandler : ICommandHandler<ChangeShopStatusCommand>
     {
         private readonly IShopRepository _shopRepository;
         private readonly IUnitOfWork _unitOfWork;

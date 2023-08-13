@@ -2,5 +2,5 @@
 
 namespace MyShop.Application.Services.Shops.Commands.Create;
 
-public sealed record CreateShopCommand(RegisterShopDto dto) : ICommand<int>;
+public sealed record CreateShopCommand(string Name, string Address) : ICommand;
 

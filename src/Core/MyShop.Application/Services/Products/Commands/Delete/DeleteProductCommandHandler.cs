@@ -6,7 +6,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Products.Commands.Delete
 {
-    public sealed class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand>
+    internal sealed class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand>
     {
         private readonly IProductRepository _productRepository;
         private readonly IUnitOfWork _unitOfWork;

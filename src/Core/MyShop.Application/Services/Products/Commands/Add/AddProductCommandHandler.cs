@@ -5,7 +5,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Products.Commands.Add
 {
-    public sealed class AddProductCommandHandler : ICommandHandler<AddProductCommand>
+    internal sealed class AddProductCommandHandler : ICommandHandler<AddProductCommand>
     {
         private readonly IProductRepository _repository;
         private readonly IUnitOfWork _unitOfWork;

@@ -26,7 +26,7 @@ namespace MyShop.Domain.Aggregates.Shops
         {                           
             var shopName = Name.Create(name);
 
-            if (!shopName.IsSuccess)
+            if (shopName.IsFailure)
             {                
                 return Result.Failure<Shop>(shopName.Error);
             }

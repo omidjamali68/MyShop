@@ -4,7 +4,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Shops.Commands.Delete
 {
-    public sealed class DeleteShopCommandHandler : ICommandHandler<DeleteShopCommand>
+    internal sealed class DeleteShopCommandHandler : ICommandHandler<DeleteShopCommand>
     {
         private readonly IShopRepository _shopRepository;
         private readonly IUnitOfWork _unitOfWork;

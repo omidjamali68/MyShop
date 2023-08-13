@@ -8,7 +8,7 @@ using MyShop.Domain.SharedKernel;
 
 namespace MyShop.Application.Services.Shops.ShopManagers.Commands.Add
 {
-    public sealed class AddShopManagerCommandHandler : ICommandHandler<AddShopMangerCommand>
+    internal sealed class AddShopManagerCommandHandler : ICommandHandler<AddShopMangerCommand>
     {        
         private readonly IShopRepository _shopRepository;
         private readonly IManagerRepository _managerRepository;

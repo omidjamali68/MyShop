@@ -38,14 +38,14 @@ namespace shiraz_shop.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(RegisterShopDto dto)
+        public async Task<IActionResult> Create(CreateShopCommand dto)
         {
             if (!ModelState.IsValid)
             {
                 return View(dto);
             }
 
-            await _mediator.Send(new CreateShopCommand(dto));
+            await _mediator.Send(dto);
             return RedirectToAction(nameof(Index));
         }
 

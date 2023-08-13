@@ -3,7 +3,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Managers.Queries.GetManagers
 {
-    public sealed class GetManagersQueryHandler : IQueryHandler<GetManagersQuery, GetManagersResponse>
+    internal sealed class GetManagersQueryHandler : IQueryHandler<GetManagersQuery, GetManagersResponse>
     {
         private readonly IManagerRepository _managerRepository;
 

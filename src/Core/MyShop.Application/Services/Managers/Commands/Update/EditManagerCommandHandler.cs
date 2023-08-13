@@ -6,7 +6,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Managers.Commands.Update
 {
-    public sealed class EditManagerCommandHandler : ICommandHandler<EditManagerCommand>
+    internal sealed class EditManagerCommandHandler : ICommandHandler<EditManagerCommand>
     {
         private readonly IManagerRepository _managerRepository;
         private readonly IUnitOfWork _unitOfWork;

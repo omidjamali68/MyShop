@@ -3,7 +3,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Products.Categories.Queries
 {
-    public sealed class GetGategoriesQueryHandler : IQueryHandler<GetCategoriesQuery, GetCategoriesResponse>
+    internal sealed class GetGategoriesQueryHandler : IQueryHandler<GetCategoriesQuery, GetCategoriesResponse>
     {
         private readonly ICategoryRepository _categoryRepository;
 

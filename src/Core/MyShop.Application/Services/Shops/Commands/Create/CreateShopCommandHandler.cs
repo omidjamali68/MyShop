@@ -1,12 +1,11 @@
-﻿using MediatR;
-using MyShop.Application.Interfaces;
+﻿using MyShop.Application.Interfaces;
 using MyShop.Domain;
 using MyShop.Domain.Aggregates.Shops;
 using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Shops.Commands.Create
 {
-    internal sealed class CreateShopCommandHandler : ICommandHandler<CreateShopCommand, int>
+    internal sealed class CreateShopCommandHandler : ICommandHandler<CreateShopCommand>
     {
         private readonly IShopRepository _shopRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -17,14 +16,19 @@ namespace MyShop.Application.Services.Shops.Commands.Create
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<int>> Handle(CreateShopCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(CreateShopCommand request, CancellationToken cancellationToken)
         {
-            var shop = Shop.Create(request.dto.Name, request.dto.Address, true);
+            var shop = Shop.Create(request.Name, request.Address, true);
+
+            if (shop.IsFailure)
+            {
+                return Result.Failure(shop.Error);
+            }
 
             await _shopRepository.Insert(shop.Value);
             await _unitOfWork.SaveChangeAsync();
 
-            return Result.Success(shop.Value.Id);
+            return Result.Success();
         }
         
     }
