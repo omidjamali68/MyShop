@@ -5,7 +5,7 @@ using MyShop.Domain.SeedWork;
 
 namespace MyShop.Application.Services.Shops.Commands.Create
 {
-    internal sealed class CreateShopCommandHandler : ICommandHandler<CreateShopCommand>
+    internal sealed class CreateShopCommandHandler : ICommandHandler<CreateShopCommand, int>
     {
         private readonly IShopRepository _shopRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -16,19 +16,19 @@ namespace MyShop.Application.Services.Shops.Commands.Create
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(CreateShopCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(CreateShopCommand request, CancellationToken cancellationToken)
         {
             var shop = Shop.Create(request.Name, request.Address, true);
 
             if (shop.IsFailure)
             {
-                return Result.Failure(shop.Error);
+                return Result.Failure<int>(shop.Error);
             }
 
             await _shopRepository.Insert(shop.Value);
             await _unitOfWork.SaveChangeAsync();
 
-            return Result.Success();
+            return Result.Success(shop.Value.Id);
         }
         
     }

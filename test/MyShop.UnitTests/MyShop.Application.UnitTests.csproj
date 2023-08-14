@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core\MyShop.Application\MyShop.Application.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\MyShop.Persistence\MyShop.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

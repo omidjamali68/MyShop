@@ -1,4 +1,6 @@
 ﻿using MyShop.Application.Interfaces;
+using MyShop.Common;
+using MyShop.Common.Messages;
 using MyShop.Domain;
 using MyShop.Domain.SeedWork;
 
@@ -19,7 +21,14 @@ namespace MyShop.Application.Services.Shops.Commands.Delete
         {
             var shop = await _shopRepository.FindById(request.Id);
 
-            _shopRepository.Delete(shop.Value);
+            if (shop == null)
+            {
+                return Result.Failure(Error.Create(
+                    "Shop.Delete.NotFound",
+                    string.Format(Validations.NotExist, DataDictionary.Shop)));
+            }
+
+            _shopRepository.Delete(shop.Value!);
 
             await _unitOfWork.SaveChangeAsync();
 
