@@ -45,14 +45,21 @@ namespace MyShop.Application.Services.Shops.ShopManagers.Commands.Add
             var selectedManager = await _managerRepository.FindByMobileNumber(mobile.Value);
 
             if (selectedManager is null)
-                shop.Value.AssignNewManager(request.FirstName, request.LastName, request.Age, request.MobileNumber);
-            else
-                shop.Value.AssignExistManager(selectedManager);
-
-            if (shop.IsFailure)
             {
-                return Result.Failure(shop.Error);
-            }
+                var res = shop.AssignNewManager(request.FirstName, request.LastName, request.Age, request.MobileNumber);
+                if (res.IsFailure)
+                {
+                    return Result.Failure(res.Error);
+                }
+            }                
+            else
+            {
+                var res = shop.AssignExistManager(selectedManager);
+                if (res.IsFailure)
+                {
+                    return Result.Failure(res.Error);
+                }
+            }                
 
             await _unitOfWork.SaveChangeAsync();
             

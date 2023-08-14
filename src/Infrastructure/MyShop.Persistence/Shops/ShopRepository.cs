@@ -21,7 +21,7 @@ namespace MyShop.Persistence.Shops
             _context.Shops.Remove(shop);
         }
 
-        public async Task<Result<Shop?>> FindById(int id)
+        public async Task<Shop?> FindById(int id)
         {
             return await _context.Shops.FindAsync(id);
         }

@@ -64,9 +64,9 @@ namespace shiraz_shop.Areas.Admin.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit(EditShopDto dto)
+        public async Task<IActionResult> Edit(EditShopCommand dto)
         {
-            var result = await _mediator.Send(new EditShopCommand(dto.ShopId, dto.Name, dto.Address));
+            var result = await _mediator.Send(dto);
             return Json(result);
         }
     }

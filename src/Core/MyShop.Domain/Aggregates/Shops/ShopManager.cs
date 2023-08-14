@@ -1,4 +1,5 @@
 ﻿using MyShop.Domain.Aggregates.Managers;
+using MyShop.Domain.SeedWork;
 
 namespace MyShop.Domain.Aggregates.Shops
 {
@@ -20,7 +21,7 @@ namespace MyShop.Domain.Aggregates.Shops
         public int ShopId { get; private set; }
         public Shop Shop { get; private set; }
 
-        public static ShopManager Create(Shop shop, Manager manager)
+        public static Result<ShopManager> Create(Shop shop, Manager manager)
         {
             return new ShopManager(shop, manager);
         }

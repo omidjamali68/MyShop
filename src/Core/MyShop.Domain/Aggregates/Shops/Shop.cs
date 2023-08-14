@@ -22,7 +22,7 @@ namespace MyShop.Domain.Aggregates.Shops
             IsActive = isActive;
         }
 
-        public static Result<Shop> Create(string name, string address, bool isActive)
+        public static Result<Shop> Create(string name, string address, bool isActive = true)
         {                           
             var shopName = Name.Create(name);
 
@@ -67,14 +67,29 @@ namespace MyShop.Domain.Aggregates.Shops
                 return Result.Failure<Shop>(manager.Error);
             }
 
-            _shopManagers.Add(ShopManager.Create(this, manager.Value));
+            var shopManagerResult = ShopManager.Create(this, manager.Value);
+            if (shopManagerResult.IsFailure)
+            {
+                return Result.Failure(shopManagerResult.Error);
+            }
+
+            _shopManagers.Add(shopManagerResult.Value);
 
             return Result.Success();
         }
 
-        public void AssignExistManager(Manager selectedManager)
+        public Result AssignExistManager(Manager selectedManager)
         {
-            _shopManagers.Add(ShopManager.Create(this, selectedManager));
+            var manager = ShopManager.Create(this, selectedManager);
+
+            if (manager.IsFailure)
+            {
+                return Result.Failure(manager.Error);
+            }
+
+            _shopManagers.Add(manager.Value);
+
+            return Result.Success();
         }
     }
 }

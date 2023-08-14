@@ -21,14 +21,14 @@ namespace MyShop.Application.Services.Shops.Commands.Delete
         {
             var shop = await _shopRepository.FindById(request.Id);
 
-            if (shop == null)
+            if (shop is null)
             {
                 return Result.Failure(Error.Create(
                     "Shop.Delete.NotFound",
                     string.Format(Validations.NotExist, DataDictionary.Shop)));
             }
 
-            _shopRepository.Delete(shop.Value!);
+            _shopRepository.Delete(shop);
 
             await _unitOfWork.SaveChangeAsync();
 

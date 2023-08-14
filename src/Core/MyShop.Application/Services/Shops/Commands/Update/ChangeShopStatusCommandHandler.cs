@@ -20,20 +20,15 @@ namespace MyShop.Application.Services.Shops.Commands.Update
         {
             var shop = await _shopRepository.FindById(request.Id);
 
-            if (shop == null) 
+            if (shop is null) 
             {
                 return Result.Failure(
                     Error.Create(
                         "Shop.ChangeStatus.ShopNotFound", 
                         string.Format(Validations.NotExist, DataDictionary.Shop)));
-            }
+            }            
 
-            if (shop.IsFailure)
-            {
-                return Result.Failure(shop.Error);
-            }
-
-            var result = shop.Value.ChangeStatus();
+            var result = shop.ChangeStatus();
 
             if (result.IsFailure)
             {

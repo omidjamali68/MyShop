@@ -29,7 +29,7 @@ namespace MyShop.Application.Services.Shops.Commands.Update
                         string.Format(Validations.NotExist, DataDictionary.Shop)));
             }
 
-            var result = shop.Value!.Update(request.Name, request.Address);
+            var result = shop.Update(request.Name, request.Address);
 
             if (result.IsFailure)
             {
