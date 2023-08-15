@@ -4,7 +4,7 @@ using MyShop.Persistence;
 
 namespace MyShop.Application.UnitTests
 {
-    public class TestHelp<TType>
+    public abstract class TestHelp<TType>
     {
         private EFInMemoryDatabase db = new EFInMemoryDatabase();
         private ApplicationDbContext _context;
