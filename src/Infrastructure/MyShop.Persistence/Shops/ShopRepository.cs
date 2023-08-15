@@ -32,7 +32,7 @@ namespace MyShop.Persistence.Shops
             
             if (searchKey is not null)
                 shops = shops
-                    .Where(x => ((string)x.Name).Contains(searchKey));                  
+                    .Where(x => ((string)x.Name).ToLower().Contains(searchKey.ToLower()));                  
             
             var result = shops.Select(x =>
                     new GetShopsDto(x.Id, (string)x.Name, x.Address, x.IsActive));
