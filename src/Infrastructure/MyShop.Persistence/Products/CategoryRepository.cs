@@ -20,7 +20,8 @@ namespace MyShop.Persistence.Products
 
             if (!string.IsNullOrWhiteSpace(request.SearchKey))
             {
-                categories = categories.Where(x => ((string)x.Name).Contains(request.SearchKey));
+                categories = categories.Where(
+                    x => ((string)x.Name).ToLower().Contains(request.SearchKey.ToLower()));
             }
 
             var categoriesList = categories.Select(x => 

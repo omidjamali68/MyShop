@@ -18,7 +18,7 @@ namespace MyShop.Domain.Aggregates.Products.Entities
         {            
         }
 
-        public static Result<Category> Create(string name, int? parentCategoryId)
+        public static Result<Category> Create(string name, int? parentCategoryId = null)
         {
             var category = new Category();
 
