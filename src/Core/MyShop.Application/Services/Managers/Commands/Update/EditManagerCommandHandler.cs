@@ -21,11 +21,11 @@ namespace MyShop.Application.Services.Managers.Commands.Update
         {
             var manager = await _managerRepository.FindById(request.Id);
 
-            if (manager == null) 
+            if (manager is null)
             {
                 return Result.Failure(
                     Error.Create(
-                        "Manager.Edit.NotFound", 
+                        "Manager.Edit.NotFound",
                         string.Format(Validations.NotExist, DataDictionary.Manager)));
             }
 
@@ -40,5 +40,6 @@ namespace MyShop.Application.Services.Managers.Commands.Update
 
             return Result.Success();
         }
+        
     }
 }

@@ -21,7 +21,7 @@ namespace MyShop.Application.Services.Managers.Commands.Delete
         {
             var manager = await _managerRepository.FindById(request.ManagerId);
 
-            if (manager == null)
+            if (manager is null)
             {
                 return Result.Failure(
                     Error.Create(

@@ -38,9 +38,9 @@ namespace MyShop.Persistence.Managers
             var managers = _context.Managers.AsQueryable();            
 
             if (!string.IsNullOrEmpty(searchKey))
-                managers = managers.Where(x => x.FirstName.Contains(searchKey) ||
-                    x.LastName.Contains(searchKey) ||
-                    x.ShopeManagers.Any(_ => ((string)_.Shop.Name).Contains(searchKey))
+                managers = managers.Where(x => x.FirstName.ToLower().Contains(searchKey.ToLower()) ||
+                    x.LastName.ToLower().Contains(searchKey.ToLower()) ||
+                    x.ShopeManagers.Any(_ => ((string)_.Shop.Name).Contains(searchKey.ToLower()))
                     );
 
             var selectedManager = managers.Select(x => new GetManagersDto

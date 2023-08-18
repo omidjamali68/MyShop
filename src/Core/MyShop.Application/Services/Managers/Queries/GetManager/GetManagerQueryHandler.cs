@@ -17,5 +17,6 @@ namespace MyShop.Application.Services.Managers.Queries.GetManager
         {
             return await _managerRepository.GetById(request.ManagerId);
         }
+        
     }
 }

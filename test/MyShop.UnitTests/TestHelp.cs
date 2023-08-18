@@ -4,7 +4,7 @@ using MyShop.Persistence;
 
 namespace MyShop.Application.UnitTests
 {
-    public abstract class TestHelp<TType>
+    public abstract class TestHelp<TRepository>
     {
         private EFInMemoryDatabase db = new EFInMemoryDatabase();
         private ApplicationDbContext _context;
@@ -18,6 +18,6 @@ namespace MyShop.Application.UnitTests
             } 
         } 
         protected IUnitOfWork UnitOfWork { get { return new UnitOfWork(Context); } }
-        protected TType Repository { get; set; }
+        protected TRepository Repository { get; set; }
     }
 }
