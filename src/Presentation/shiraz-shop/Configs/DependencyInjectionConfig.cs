@@ -5,6 +5,7 @@ using MyShop.Application.Services.AspIdentities.ApplicationUsers;
 using MyShop.Domain.Core.RepositoryContracts;
 using MyShop.Persistence.Shops;
 using MyShop.Domain;
+using MyShop.Application.Services.Shops;
 
 namespace shiraz_shop.Configs
 {
@@ -16,7 +17,7 @@ namespace shiraz_shop.Configs
         }
 
         public override void ConfigureServiceContainer(ContainerBuilder container)
-        {
+        {            
             container.RegisterAssemblyTypes(typeof(ApplicationUserService).Assembly)
                  .AssignableTo<IService>()
                  .AsImplementedInterfaces()
@@ -26,6 +27,9 @@ namespace shiraz_shop.Configs
                  .AssignableTo<IRepository>()
                  .AsImplementedInterfaces()
                  .InstancePerLifetimeScope();
+
+            container.RegisterDecorator<CachedShopRepository, IShopRepository>();
+            //container.RegisterGenericDecorator(typeof(RepositoryDecorator<>), typeof(IRepositoryDecorator<>));
 
             container.RegisterType<UnitOfWork>()
                 .As<IUnitOfWork>()

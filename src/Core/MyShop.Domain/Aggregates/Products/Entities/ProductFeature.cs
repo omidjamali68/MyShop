@@ -13,11 +13,11 @@ namespace MyShop.Domain.Aggregates.Products.Entities
         {
         }
 
-        public static ProductFeature Create(int productId, string displayName, string value)
+        public static Result<ProductFeature> Create(Product product, string displayName, string value)
         {
             var feature = new ProductFeature();
 
-            feature.ProductId = productId;
+            feature.Product = product;
             feature.DisplayName = displayName;
             feature.Value = value;
 

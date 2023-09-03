@@ -3,10 +3,10 @@ using MyShop.Application.Services.Shops;
 using MyShop.Application.Services.Shops.ShopManagers.Commands.Add;
 using MyShop.Domain.Aggregates.Shops;
 using MyShop.Persistence.Shops;
-using Cooking.Infrastructure.Test;
 using FluentAssertions;
 using MyShop.Persistence.Managers;
 using MyShop.Domain.Aggregates.Managers;
+using MyShop.Common.Tests;
 
 namespace MyShop.Application.UnitTests.Shops.ShopManagers.Commands
 {

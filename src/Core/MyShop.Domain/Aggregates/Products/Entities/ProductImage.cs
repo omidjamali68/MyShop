@@ -10,12 +10,12 @@ namespace MyShop.Domain.Aggregates.Products.Entities
 
         private ProductImage()
         { 
-        }
+        }        
 
-        public static ProductImage Create(int productId, string src)
+        public static Result<ProductImage> Create(Product product, string src)
         {
             var image = new ProductImage();
-            image.ProductId = productId;
+            image.Product = product;
             image.Src = src;
             return image;
         }

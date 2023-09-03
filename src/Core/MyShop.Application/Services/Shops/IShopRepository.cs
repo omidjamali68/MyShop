@@ -9,7 +9,7 @@ namespace MyShop.Application.Services.Shops
     {
         void Delete(Shop shop);
         Task<Shop?> FindById(int id);
-        Task<Result<GetShopsResponse>> GetAll(string? searchKey, int page);
+        Task<Result<GetShopsResponse>?> GetAll(string? searchKey, int page);
         Task Insert(Shop shop);
     }
 }

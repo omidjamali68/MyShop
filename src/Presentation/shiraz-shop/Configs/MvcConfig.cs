@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-
-namespace shiraz_shop.Configs
+﻿namespace shiraz_shop.Configs
 {
     public class MvcConfig : MyConfiguration
     {
@@ -9,9 +6,15 @@ namespace shiraz_shop.Configs
         {
             container.AddMediatR(cfg => 
                 cfg.RegisterServicesFromAssembly(MyShop.Application.AssemblyReference.Assembly));
+
+            container.AddStackExchangeRedisCache(redisOption => 
+            {
+                string connection = AppSettings.GetConnectionString("Redis");
+                redisOption.Configuration = connection;
+            });
             
             container.AddControllersWithViews();
-            container.AddRouting();
+            container.AddRouting();            
 
             container.ConfigureApplicationCookie(op => op.LoginPath = "/Home/Login");
         }

@@ -1,9 +1,9 @@
-﻿using Cooking.Infrastructure.Test;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MyShop.Application.Services.Products.Categories;
 using MyShop.Application.Services.Products.Categories.Queries;
 using MyShop.Domain.Aggregates.Products.Entities;
 using MyShop.Persistence.Products;
+using MyShop.Common.Tests;
 
 namespace MyShop.Application.UnitTests.Products.Categories.Queries
 {

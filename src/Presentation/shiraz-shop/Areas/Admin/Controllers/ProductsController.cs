@@ -55,7 +55,8 @@ namespace shiraz_shop.Areas.Admin.Controllers
                 request.Quantity, 
                 request.CategoryId, 
                 request.Displayed, 
-                images, Features);
+                images, 
+                Features);
 
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index));

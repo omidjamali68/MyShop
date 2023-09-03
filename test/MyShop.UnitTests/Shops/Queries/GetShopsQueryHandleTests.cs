@@ -1,9 +1,9 @@
-﻿using Cooking.Infrastructure.Test;
-using MyShop.Application.Services.Shops;
+﻿using MyShop.Application.Services.Shops;
 using MyShop.Persistence.Shops;
 using MyShop.Domain.Aggregates.Shops;
 using MyShop.Application.Services.Shops.Queries.GetShops;
 using FluentAssertions;
+using MyShop.Common.Tests;
 
 namespace MyShop.Application.UnitTests.Shops.Queries
 {

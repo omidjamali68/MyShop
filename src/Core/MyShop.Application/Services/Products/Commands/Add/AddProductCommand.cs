@@ -12,7 +12,7 @@ namespace MyShop.Application.Services.Products.Commands.Add
         int CategoryId,
         bool Displayed,
         List<IFormFile> Images,
-        List<AddNewProduct_FeaturesDto> Features) : ICommand;
+        List<AddNewProduct_FeaturesDto> Features) : ICommand<int>;
 
     public sealed record AddProductDto(
         string Name,

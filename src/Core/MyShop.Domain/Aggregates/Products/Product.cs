@@ -7,8 +7,8 @@ namespace MyShop.Domain.Aggregates.Products
 {
     public sealed class Product : AggregateRoot
     {
-        private HashSet<ProductImage> _productImages = new();
-        private HashSet<ProductFeature> _productFeatures = new();
+        private readonly List<ProductImage> _productImages;
+        private readonly List<ProductFeature> _productFeatures;
 
         public Name Name { get; private set; }
         public Quantity Quantity { get; private set; }
@@ -21,9 +21,11 @@ namespace MyShop.Domain.Aggregates.Products
         public IReadOnlyCollection<ProductImage> ProductImages => _productImages;
         public IReadOnlyCollection<ProductFeature> ProductFeatures => _productFeatures;        
 
-        private Product() { }
+        private Product() 
+        {           
+        }
 
-        public Product(
+        private Product(
             Name name, 
             Quantity quantity, 
             string brand, 
@@ -39,10 +41,18 @@ namespace MyShop.Domain.Aggregates.Products
             Price = price;
             Displayed = displayed;
             CategoryId = categoryId;
+            _productImages = new List<ProductImage>();
+            _productFeatures = new List<ProductFeature>();
         }
 
         public static Result<Product> Create(
-            string name, int quantity, string brand, string description, int price, bool displayed, int categoryId)
+            string name, 
+            int quantity, 
+            string brand, 
+            string description, 
+            int price, 
+            bool displayed, 
+            int categoryId)
         {            
             var quantityResult = Quantity.Create(quantity);
             if (quantityResult.IsFailure)
@@ -54,14 +64,39 @@ namespace MyShop.Domain.Aggregates.Products
             if (nameResult.IsFailure)
             {
                 return Result.Failure<Product>(nameResult.Error);
-            }            
-
+            }                        
+            
             return new Product(
                 nameResult.Value, quantityResult.Value, brand, description, price, displayed, categoryId);
         }
 
         public void Delete()
         {            
+        }
+
+        public Result AssignImage(string fileNameAddress)
+        {
+            var image = ProductImage.Create(this, fileNameAddress);
+            if (image.IsFailure)
+            {
+                return Result.Failure(image.Error);
+            }
+            
+            _productImages.Add(image.Value);
+            return Result.Success();
+        }
+
+        public Result AddFeature(KeyValuePair<string, string> feature)
+        {
+            var featureResult = ProductFeature.Create(this, feature.Key, feature.Value);
+
+            if (featureResult.IsFailure)
+            {
+                return Result.Failure(featureResult.Error);
+            }
+
+            _productFeatures.Add(featureResult.Value);
+            return Result.Success();
         }
     }
 }

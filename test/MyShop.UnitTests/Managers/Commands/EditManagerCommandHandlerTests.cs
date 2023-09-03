@@ -1,10 +1,9 @@
-﻿using Cooking.Infrastructure.Test;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MyShop.Application.Services.Managers;
-using MyShop.Application.Services.Managers.Commands.Delete;
 using MyShop.Application.Services.Managers.Commands.Update;
 using MyShop.Domain.Aggregates.Managers;
 using MyShop.Persistence.Managers;
+using MyShop.Common.Tests;
 
 namespace MyShop.Application.UnitTests.Managers.Commands
 {

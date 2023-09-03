@@ -1,6 +1,6 @@
-﻿using Cooking.Infrastructure.Test;
-using MyShop.Domain;
+﻿using MyShop.Domain;
 using MyShop.Persistence;
+using MyShop.Common.Tests;
 
 namespace MyShop.Application.UnitTests
 {

@@ -26,7 +26,7 @@ namespace MyShop.Persistence.Shops
             return await _context.Shops.FindAsync(id);
         }
 
-        public async Task<Result<GetShopsResponse>> GetAll(string? searchKey, int page)
+        public async Task<Result<GetShopsResponse>?> GetAll(string? searchKey, int page)
         {            
             var shops = _context.Shops.AsQueryable();            
             

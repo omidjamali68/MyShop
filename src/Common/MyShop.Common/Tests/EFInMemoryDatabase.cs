@@ -2,7 +2,7 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cooking.Infrastructure.Test
+namespace MyShop.Common.Tests
 {
     public class EFInMemoryDatabase : IDisposable
     {

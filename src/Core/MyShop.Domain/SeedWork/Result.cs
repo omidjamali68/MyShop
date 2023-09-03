@@ -3,9 +3,7 @@
     public class Result
     {
         protected internal Result(bool isSuccess, Error error)
-        {
-            Messeges = new HashSet<string>();
-
+        {            
             if (isSuccess && error != Error.None)            
                 throw new InvalidOperationException(); 
             
@@ -18,22 +16,9 @@
 
         public bool IsSuccess { get; }
         public Error Error { get; }
-        public bool IsFailure => !IsSuccess;
-        public HashSet<string> Messeges { get; private set; }
+        public bool IsFailure => !IsSuccess;        
 
-        public static Result Success() => new(true, Error.None);
-        
-        public void WithError(string errorMessage)
-        {
-            Messeges.Add(errorMessage);
-            //IsSuccess = false;
-        }
-
-        public void SetErrors(HashSet<string> messeges)
-        {
-            Messeges = messeges;
-            //IsSuccess = false;
-        }
+        public static Result Success() => new(true, Error.None);               
 
         public static Result<TType> Success<TType>(TType type) => new(type, true, Error.None);
 
@@ -46,9 +31,12 @@
     public class Result<TValue> : Result
     {
         private readonly TValue _value;
-        protected internal Result(TValue value, bool isSuccess, Error error)
+        public Result(TValue value, bool isSuccess, Error error)
             : base(isSuccess, error) =>
             _value = value;
+
+        // For JsonConvert
+        //private Result() : base() { }
 
         public TValue Value => IsSuccess && _value is not null
             ? _value!

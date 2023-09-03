@@ -287,3 +287,6 @@ CodeGraphData/
 *.vpp.bak*
 src/*.RestApi/Properties/
 .config/
+
+# My Config
+src/Presentation/shiraz-shop/wwwroot/AdminTemplate/app-assets/images/

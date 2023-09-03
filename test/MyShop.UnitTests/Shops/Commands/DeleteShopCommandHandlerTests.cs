@@ -1,10 +1,10 @@
-﻿using Cooking.Infrastructure.Test;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MyShop.Application.Services.Shops;
 using MyShop.Application.Services.Shops.Commands.Delete;
 using MyShop.Domain.Aggregates.Shops;
 using MyShop.Domain.SeedWork;
 using MyShop.Persistence.Shops;
+using MyShop.Common.Tests;
 
 namespace MyShop.Application.UnitTests.Shops.Commands
 {
